@@ -1,238 +1,1275 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <title>Smart Trap – Painel de Monitoramento</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Smart Trap – Sistema Inteligente de Monitoramento de Vetores</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Sistema de vigilância epidemiológica de vetores com IA">
 
-  <!-- Fonte -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Fontes e bibliotecas -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+:root {
+  /* Paleta científica moderna */
+  --primary: #0B5345;
+  --primary-light: #117864;
+  --secondary: #2E86C1;
+  --accent: #E74C3C;
+  --success: #27AE60;
+  --warning: #F39C12;
+  --dark: #1B2631;
+  --light: #F8F9FA;
+  --gray-100: #E8E8E8;
+  --gray-200: #D5D8DC;
+  --gray-600: #5D6D7E;
+  --card-bg: #FFFFFF;
+  --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+  
+  --radius-lg: 20px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 12px 36px rgba(0, 0, 0, 0.12);
+  
+  --font-main: 'Inter', sans-serif;
+  --font-heading: 'Source Sans Pro', sans-serif;
+}
 
-  <style>
-    :root {
-      --bg: #f8fafc;
-      --card: #ffffff;
-      --text: #1e293b;
-      --muted: #64748b;
-      --green: #10b981;
-      --blue: #3b82f6;
-      --red: #ef4444;
-      --yellow: #f59e0b;
-      --radius: 16px;
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-main);
+}
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Inter", sans-serif;
-    }
+body {
+  background: var(--bg-gradient);
+  color: var(--dark);
+  min-height: 100vh;
+  line-height: 1.6;
+}
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      padding: 24px;
-    }
+/* ===== LOGIN SCREEN ===== */
+.login-screen {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, var(--primary) 0%, #0A3D62 100%);
+  padding: 20px;
+}
 
-    header {
-      margin-bottom: 32px;
-    }
+.login-card {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  width: 100%;
+  max-width: 420px;
+  padding: 48px 40px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
 
-    header h1 {
-      font-size: 32px;
-      font-weight: 700;
-    }
+.logo-container {
+  margin-bottom: 32px;
+}
 
-    header p {
-      color: var(--muted);
-      margin-top: 6px;
-    }
+.logo-scientific {
+  width: 90px;
+  height: 90px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  box-shadow: var(--shadow-md);
+}
 
-    .grid {
-      display: grid;
-      gap: 20px;
-    }
+.logo-scientific i {
+  font-size: 42px;
+  color: white;
+}
 
-    .grid-3 {
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    }
+.login-card h1 {
+  font-family: var(--font-heading);
+  color: var(--primary);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
 
-    .grid-2 {
-      grid-template-columns: 2fr 1fr;
-    }
+.login-subtitle {
+  color: var(--gray-600);
+  font-size: 16px;
+  margin-bottom: 32px;
+  font-weight: 500;
+}
 
-    .card {
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.04);
-      transition: transform .2s ease;
-    }
+.input-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
 
-    .card:hover {
-      transform: translateY(-3px);
-    }
+.input-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--dark);
+  font-size: 14px;
+}
 
-    .kpi {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
+.input-group input {
+  width: 100%;
+  padding: 16px 20px;
+  border: 2px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background: white;
+}
 
-    .icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      color: white;
-    }
+.input-group input:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(11, 83, 69, 0.1);
+}
 
-    .green { background: var(--green); }
-    .blue { background: var(--blue); }
-    .red { background: var(--red); }
+.login-btn {
+  width: 100%;
+  padding: 18px;
+  background: linear-gradient(to right, var(--primary), var(--primary-light));
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  box-shadow: 0 6px 20px rgba(11, 83, 69, 0.3);
+}
 
-    .kpi h2 {
-      font-size: 26px;
-      font-weight: 600;
-    }
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(11, 83, 69, 0.4);
+}
 
-    .kpi span {
-      font-size: 13px;
-      color: var(--muted);
-    }
+/* ===== DASHBOARD ===== */
+.dashboard {
+  display: none;
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
 
-    .alerts ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+/* Header */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 22px 32px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  margin-bottom: 30px;
+  border-left: 6px solid var(--primary);
+}
 
-    .alert {
-      padding: 14px;
-      border-radius: 12px;
-      font-size: 14px;
-    }
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
 
-    .alert.red {
-      background: #fee2e2;
-      color: #991b1b;
-    }
+.brand-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-    .alert.yellow {
-      background: #fef3c7;
-      color: #92400e;
-    }
+.brand-icon i {
+  font-size: 28px;
+  color: white;
+}
 
-    footer {
-      margin-top: 40px;
-      text-align: center;
-      font-size: 12px;
-      color: var(--muted);
-    }
+.brand-text h1 {
+  font-family: var(--font-heading);
+  color: var(--dark);
+  font-size: 24px;
+  margin-bottom: 4px;
+}
 
-    @media (max-width: 900px) {
-      .grid-2 {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+.brand-text p {
+  color: var(--gray-600);
+  font-size: 14px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.btn-icon {
+  background: white;
+  border: 2px solid var(--gray-200);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--dark);
+}
+
+.btn-icon:hover {
+  background: var(--light);
+  border-color: var(--primary-light);
+  color: var(--primary);
+}
+
+.export-btn {
+  background: linear-gradient(to right, var(--primary), var(--primary-light));
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.export-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* KPI Cards */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin-bottom: 30px;
+}
+
+.kpi-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-top: 4px solid var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.kpi-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.kpi-icon-container {
+  width: 70px;
+  height: 70px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+}
+
+.kpi-icon-1 { background: rgba(11, 83, 69, 0.1); color: var(--primary); }
+.kpi-icon-2 { background: rgba(46, 134, 193, 0.1); color: var(--secondary); }
+.kpi-icon-3 { background: rgba(243, 156, 18, 0.1); color: var(--warning); }
+.kpi-icon-4 { background: rgba(39, 174, 96, 0.1); color: var(--success); }
+
+.kpi-content h3 {
+  font-size: 14px;
+  color: var(--gray-600);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.kpi-value {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--dark);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.kpi-trend {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.trend-up { color: var(--success); }
+.trend-down { color: var(--accent); }
+
+/* Charts Section */
+.charts-section {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 1100px) {
+  .charts-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chart-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: var(--shadow-sm);
+}
+
+.chart-card h2 {
+  font-family: var(--font-heading);
+  color: var(--dark);
+  font-size: 20px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.chart-container {
+  height: 320px;
+  position: relative;
+}
+
+/* Alerts Section */
+.alerts-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 30px;
+}
+
+.alerts-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.alert-badge {
+  background: var(--accent);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.alert-item {
+  padding: 20px;
+  border-radius: var(--radius-md);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  border-left: 5px solid;
+}
+
+.alert-critical {
+  background: rgba(231, 76, 60, 0.08);
+  border-left-color: var(--accent);
+}
+
+.alert-warning {
+  background: rgba(243, 156, 18, 0.08);
+  border-left-color: var(--warning);
+}
+
+.alert-info {
+  background: rgba(46, 134, 193, 0.08);
+  border-left-color: var(--secondary);
+}
+
+.alert-icon {
+  font-size: 22px;
+  margin-top: 2px;
+}
+
+.alert-content h4 {
+  font-size: 16px;
+  margin-bottom: 6px;
+  color: var(--dark);
+}
+
+.alert-content p {
+  font-size: 14px;
+  color: var(--gray-600);
+  margin-bottom: 8px;
+}
+
+.alert-meta {
+  font-size: 12px;
+  color: var(--gray-600);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Data Table */
+.data-table-container {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+.data-table thead {
+  background: linear-gradient(to right, var(--primary), var(--primary-light));
+  color: white;
+}
+
+.data-table th {
+  padding: 18px 20px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.data-table tbody tr {
+  border-bottom: 1px solid var(--gray-100);
+  transition: background 0.2s ease;
+}
+
+.data-table tbody tr:hover {
+  background: rgba(11, 83, 69, 0.03);
+}
+
+.data-table td {
+  padding: 18px 20px;
+  color: var(--dark);
+}
+
+.species-tag {
+  background: rgba(46, 134, 193, 0.1);
+  color: var(--secondary);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.risk-high { color: var(--accent); font-weight: 600; }
+.risk-medium { color: var(--warning); font-weight: 600; }
+.risk-low { color: var(--success); font-weight: 600; }
+
+/* ===== RELATÓRIO CIENTÍFICO (PDF) ===== */
+#pdfReport {
+  background: white;
+  padding: 60px 50px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.report-header {
+  text-align: center;
+  padding-bottom: 40px;
+  border-bottom: 2px solid var(--gray-200);
+  margin-bottom: 50px;
+}
+
+.report-logo {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+}
+
+.report-logo i {
+  font-size: 48px;
+  color: white;
+}
+
+.report-title {
+  font-family: var(--font-heading);
+  color: var(--primary);
+  font-size: 36px;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.report-subtitle {
+  color: var(--gray-600);
+  font-size: 18px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.report-meta {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+  color: var(--gray-600);
+  font-size: 15px;
+}
+
+.report-section {
+  margin-bottom: 50px;
+}
+
+.report-section h2 {
+  font-family: var(--font-heading);
+  color: var(--primary);
+  font-size: 24px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.report-section h3 {
+  font-family: var(--font-heading);
+  color: var(--dark);
+  font-size: 18px;
+  margin: 25px 0 15px;
+}
+
+.report-text {
+  line-height: 1.8;
+  color: var(--dark);
+  text-align: justify;
+  margin-bottom: 20px;
+}
+
+.report-highlights {
+  background: rgba(11, 83, 69, 0.05);
+  border-left: 5px solid var(--primary);
+  padding: 25px;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  margin: 30px 0;
+}
+
+.report-highlights ul {
+  list-style-type: none;
+}
+
+.report-highlights li {
+  margin-bottom: 12px;
+  padding-left: 24px;
+  position: relative;
+}
+
+.report-highlights li:before {
+  content: "•";
+  color: var(--primary);
+  font-size: 24px;
+  position: absolute;
+  left: 0;
+  top: -4px;
+}
+
+.figure-container {
+  text-align: center;
+  margin: 40px 0;
+  padding: 20px;
+  background: var(--light);
+  border-radius: var(--radius-md);
+}
+
+.figure-title {
+  font-weight: 600;
+  margin-top: 15px;
+  font-size: 15px;
+  color: var(--dark);
+}
+
+.figure-caption {
+  font-size: 14px;
+  color: var(--gray-600);
+  margin-top: 8px;
+  font-style: italic;
+}
+
+.report-footer {
+  margin-top: 60px;
+  padding-top: 30px;
+  border-top: 1px solid var(--gray-200);
+  text-align: center;
+  color: var(--gray-600);
+  font-size: 14px;
+}
+
+.signature-area {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.signature-line {
+  width: 250px;
+  border-top: 1px solid var(--dark);
+  text-align: center;
+  padding-top: 40px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 16px;
+  }
+  
+  .dashboard-header {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .charts-section {
+    grid-template-columns: 1fr;
+  }
+  
+  #pdfReport {
+    padding: 30px 20px;
+  }
+  
+  .report-title {
+    font-size: 28px;
+  }
+  
+  .signature-area {
+    flex-direction: column;
+    gap: 40px;
+  }
+}
+
+.print-only {
+  display: none;
+}
+
+@media print {
+  .no-print {
+    display: none;
+  }
+  
+  .print-only {
+    display: block;
+  }
+  
+  #pdfReport {
+    padding: 0;
+    box-shadow: none;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <header>
-    <h1>Smart Trap</h1>
-    <p>Vigilância inteligente de vetores epidemiológicos em tempo real</p>
-  </header>
+<!-- TELA DE LOGIN -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-card">
+    <div class="logo-container">
+      <div class="logo-scientific">
+        <i class="fas fa-bug"></i>
+      </div>
+      <h1>Smart Trap</h1>
+      <p class="login-subtitle">Sistema Inteligente de Vigilância Entomológica</p>
+    </div>
+    
+    <div class="input-group">
+      <label for="codigo"><i class="fas fa-key"></i> Código de Acesso</label>
+      <input type="text" id="codigo" placeholder="Ex: ST-2024-001">
+    </div>
+    
+    <div class="input-group">
+      <label for="senha"><i class="fas fa-lock"></i> Senha</label>
+      <input type="password" id="senha" placeholder="••••••••">
+    </div>
+    
+    <button class="login-btn" onclick="fazerLogin()">
+      <i class="fas fa-sign-in-alt"></i> Acessar Sistema
+    </button>
+    
+    <p style="margin-top: 20px; font-size: 14px; color: var(--gray-600);">
+      <i class="fas fa-info-circle"></i> Use <strong>admin</strong> / <strong>1234</strong> para teste
+    </p>
+  </div>
+</div>
+
+<!-- DASHBOARD PRINCIPAL -->
+<div class="dashboard" id="dashboard">
+  <!-- Header -->
+  <div class="dashboard-header">
+    <div class="brand-section">
+      <div class="brand-icon">
+        <i class="fas fa-bug"></i>
+      </div>
+      <div class="brand-text">
+        <h1>Smart Trap Dashboard</h1>
+        <p>Monitoramento Epidemiológico em Tempo Real</p>
+      </div>
+    </div>
+    
+    <div class="header-actions">
+      <div class="btn-icon" title="Atualizar dados">
+        <i class="fas fa-sync-alt"></i>
+      </div>
+      <div class="btn-icon" title="Notificações">
+        <i class="fas fa-bell"></i>
+      </div>
+      <button class="export-btn" onclick="exportPDF()">
+        <i class="fas fa-file-pdf"></i> Gerar Relatório
+      </button>
+    </div>
+  </div>
 
   <!-- KPIs -->
-  <section class="grid grid-3">
-    <div class="card kpi">
-      <div class="icon green">🐞</div>
-      <div>
-        <span>Vetores capturados hoje</span>
-        <h2 id="capturasHoje">32</h2>
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-icon-container kpi-icon-1">
+        <i class="fas fa-bug"></i>
+      </div>
+      <div class="kpi-content">
+        <h3>Capturas Totais (24h)</h3>
+        <div class="kpi-value">142</div>
+        <div class="kpi-trend trend-up">
+          <i class="fas fa-arrow-up"></i> 12% vs. período anterior
+        </div>
       </div>
     </div>
-
-    <div class="card kpi">
-      <div class="icon blue">📍</div>
-      <div>
-        <span>Localizações ativas</span>
-        <h2>8</h2>
+    
+    <div class="kpi-card">
+      <div class="kpi-icon-container kpi-icon-2">
+        <i class="fas fa-map-marker-alt"></i>
+      </div>
+      <div class="kpi-content">
+        <h3>Armadilhas Ativas</h3>
+        <div class="kpi-value">18</div>
+        <div class="kpi-trend trend-up">
+          <i class="fas fa-check-circle"></i> 100% operacionais
+        </div>
       </div>
     </div>
-
-    <div class="card kpi">
-      <div class="icon red">⚠️</div>
-      <div>
-        <span>Alertas epidemiológicos</span>
-        <h2>3</h2>
+    
+    <div class="kpi-card">
+      <div class="kpi-icon-container kpi-icon-3">
+        <i class="fas fa-exclamation-triangle"></i>
+      </div>
+      <div class="kpi-content">
+        <h3>Alertas Ativos</h3>
+        <div class="kpi-value">5</div>
+        <div class="kpi-trend trend-up">
+          <i class="fas fa-arrow-up"></i> 2 novos hoje
+        </div>
       </div>
     </div>
-  </section>
-
-  <br>
-
-  <!-- Gráfico + Alertas -->
-  <section class="grid grid-2">
-    <div class="card">
-      <h3>Capturas nos últimos dias</h3>
-      <br>
-      <canvas id="chartCapturas" height="120"></canvas>
+    
+    <div class="kpi-card">
+      <div class="kpi-icon-container kpi-icon-4">
+        <i class="fas fa-chart-line"></i>
+      </div>
+      <div class="kpi-content">
+        <h3>Taxa de Detecção</h3>
+        <div class="kpi-value">94.7%</div>
+        <div class="kpi-trend trend-up">
+          <i class="fas fa-arrow-up"></i> +3.2% esta semana
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div class="card alerts">
-      <h3>Últimos alertas</h3>
-      <br>
+  <!-- Gráficos -->
+  <div class="charts-section">
+    <div class="chart-card">
+      <h2><i class="fas fa-chart-line"></i> Tendência de Capturas (Últimos 30 Dias)</h2>
+      <div class="chart-container">
+        <canvas id="trendChart"></canvas>
+      </div>
+    </div>
+    
+    <div class="chart-card">
+      <h2><i class="fas fa-chart-pie"></i> Distribuição por Espécie</h2>
+      <div class="chart-container">
+        <canvas id="speciesChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Alertas -->
+  <div class="alerts-card">
+    <div class="alerts-header">
+      <h2><i class="fas fa-exclamation-circle"></i> Alertas Epidemiológicos</h2>
+      <div class="alert-badge">5 Alertas Ativos</div>
+    </div>
+    
+    <div class="alert-item alert-critical">
+      <div class="alert-icon">
+        <i class="fas fa-skull-crossbones"></i>
+      </div>
+      <div class="alert-content">
+        <h4>ALERTA: Aumento de Flebotomíneos - Zona Norte</h4>
+        <p>Incremento de 240% na captura de Lutzomyia longipalpis. Risco elevado para transmissão de Leishmaniose Visceral.</p>
+        <div class="alert-meta">
+          <span><i class="far fa-clock"></i> Detectado hoje às 08:42</span>
+          <span><i class="fas fa-map-pin"></i> Coordenadas: -23.5505, -46.6333</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="alert-item alert-warning">
+      <div class="alert-icon">
+        <i class="fas fa-exclamation-triangle"></i>
+      </div>
+      <div class="alert-content">
+        <h4>Aedes aegypti acima do limite de segurança</h4>
+        <p>Densidade de 4.2 mosquitos/armadilha. Limiar de segurança: 2.0. Recomenda-se intensificação de controle.</p>
+        <div class="alert-meta">
+          <span><i class="far fa-clock"></i> Há 2 dias</span>
+          <span><i class="fas fa-map-pin"></i> Setor Leste</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="alert-item alert-info">
+      <div class="alert-icon">
+        <i class="fas fa-info-circle"></i>
+      </div>
+      <div class="alert-content">
+        <h4>Baixa eficiência em armadilha #12</h4>
+        <p>Capturas 65% abaixo da média do setor. Verificar localização e atrativos.</p>
+        <div class="alert-meta">
+          <span><i class="far fa-clock"></i> Há 3 dias</span>
+          <span><i class="fas fa-map-pin"></i> Armadilha #12</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabela de Dados -->
+  <div class="data-table-container">
+    <h2><i class="fas fa-table"></i> Dados Detalhados por Armadilha</h2>
+    <div class="table-responsive">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>ID Armadilha</th>
+            <th>Localização</th>
+            <th>Espécie Principal</th>
+            <th>Capturas (24h)</th>
+            <th>Temperatura Média</th>
+            <th>Umidade</th>
+            <th>Risco</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>ST-001</strong></td>
+            <td>Zona Norte - Parque</td>
+            <td><span class="species-tag">Lutzomyia longipalpis</span></td>
+            <td>42</td>
+            <td>26.4°C</td>
+            <td>78%</td>
+            <td class="risk-high">Alto</td>
+            <td><span style="color: var(--success);"><i class="fas fa-circle"></i> Ativa</span></td>
+          </tr>
+          <tr>
+            <td><strong>ST-002</strong></td>
+            <td>Centro - Praça</td>
+            <td><span class="species-tag">Aedes aegypti</span></td>
+            <td>28</td>
+            <td>25.8°C</td>
+            <td>72%</td>
+            <td class="risk-medium">Médio</td>
+            <td><span style="color: var(--success);"><i class="fas fa-circle"></i> Ativa</span></td>
+          </tr>
+          <!-- Mais linhas... -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- RELATÓRIO CIENTÍFICO (PDF) -->
+<div id="pdfReport" style="display: none;">
+  <div class="report-header">
+    <div class="report-logo">
+      <i class="fas fa-bug"></i>
+    </div>
+    <h1 class="report-title">Relatório Científico de Vigilância Entomológica</h1>
+    <p class="report-subtitle">Smart Trap - Sistema Inteligente de Monitoramento de Vetores</p>
+    
+    <div class="report-meta">
+      <div><strong>Período:</strong> 01 a 31 de Outubro de 2024</div>
+      <div><strong>Gerado em:</strong> <span id="reportDate"></span></div>
+      <div><strong>Código:</strong> ST-RP-2024-10-001</div>
+    </div>
+  </div>
+
+  <div class="report-section">
+    <h2>Resumo Executivo</h2>
+    <p class="report-text">
+      Este relatório apresenta os resultados do monitoramento entomológico realizado através do sistema Smart Trap 
+      durante o período de 01 a 31 de outubro de 2024. O sistema registrou um total de <strong>2.847 capturas</strong> 
+      de vetores, representando um aumento de <strong>18,4%</strong> em relação ao mês anterior. 
+      Foram identificadas <strong>12 espécies</strong> de importância epidemiológica, com destaque para 
+      <em>Lutzomyia longipalpis</em> e <em>Aedes aegypti</em>.
+    </p>
+    
+    <div class="report-highlights">
       <ul>
-        <li class="alert red">🚨 Alta incidência de flebotomíneos – Zona Rural Norte</li>
-        <li class="alert yellow">⚠️ Aumento gradual de capturas – Bairro Central</li>
-        <li class="alert red">🚨 Risco elevado para Leishmaniose</li>
+        <li><strong>2.847</strong> vetores capturados no período</li>
+        <li><strong>5 alertas</strong> epidemiológicos emitidos</li>
+        <li><strong>18 armadilhas</strong> em operação contínua</li>
+        <li><strong>94,7%</strong> de eficiência média do sistema</li>
+        <li><strong>Zona Norte</strong> apresenta maior densidade vetorial</li>
       </ul>
     </div>
-  </section>
+  </div>
 
-  <footer>
-    © Smart Trap · Vigilância Inteligente de Vetores
-  </footer>
+  <div class="report-section">
+    <h2>Metodologia</h2>
+    <h3>Desenho do Estudo</h3>
+    <p class="report-text">
+      O monitoramento foi realizado através de 18 armadilhas inteligentes distribuídas estrategicamente 
+      em 6 setores da área de estudo. Cada armadilha é equipada com sensores de temperatura, umidade 
+      e câmera de alta resolução para identificação automática de espécies.
+    </p>
+    
+    <h3>Análise de Dados</h3>
+    <p class="report-text">
+      Os dados foram processados utilizando algoritmos de machine learning para identificação específica 
+      e análise temporal. A validação taxonômica foi realizada semanalmente por entomologistas do 
+      Laboratório de Referência.
+    </p>
+  </div>
 
-  <script>
-    const ctx = document.getElementById('chartCapturas');
+  <div class="report-section">
+    <h2>Resultados</h2>
+    
+    <div class="figure-container">
+      <div class="chart-container">
+        <canvas id="pdfTrendChart"></canvas>
+      </div>
+      <div class="figure-title">Figura 1: Tendência de Capturas ao Longo do Período de Estudo</div>
+      <div class="figure-caption">Eixo Y representa número de capturas diárias; Eixo X representa dias do mês.</div>
+    </div>
+    
+    <div class="figure-container">
+      <div class="chart-container">
+        <canvas id="pdfSpeciesChart"></canvas>
+      </div>
+      <div class="figure-title">Figura 2: Distribuição Percentual por Espécie</div>
+      <div class="figure-caption">Dados agregados do período total de monitoramento.</div>
+    </div>
+    
+    <h3>Principais Achados</h3>
+    <p class="report-text">
+      1. A espécie <em>Lutzomyia longipalpis</em> representou <strong>38,2%</strong> do total de capturas, 
+      com pico observado na segunda semana de outubro.<br><br>
+      
+      2. Foram registradas <strong>5 situações</strong> que ultrapassaram os limiares de segurança 
+      estabelecidos pelo Ministério da Saúde.<br><br>
+      
+      3. A correlação entre temperatura média (>26°C) e aumento na densidade de <em>Aedes aegypti</em> 
+      foi estatisticamente significativa (p < 0,05).
+    </p>
+  </div>
 
-    new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ['01/01', '02/01', '03/01', '04/01', '05/01'],
-        datasets: [{
-          label: 'Vetores capturados',
-          data: [12, 18, 9, 22, 30],
-          borderWidth: 3,
-          tension: 0.4,
-          fill: false,
-          borderColor: '#10b981'
-        }]
+  <div class="report-section">
+    <h2>Discussão</h2>
+    <p class="report-text">
+      Os resultados indicam uma situação epidemiológica que requer atenção especial na Zona Norte, 
+      onde a densidade de flebotomíneos atingiu níveis considerados de risco para transmissão de 
+      Leishmaniose Visceral. O aumento observado nas capturas de <em>Aedes aegypti</em> coincide 
+      com o período de elevação das temperaturas, padrão esperado para a espécie.
+    </p>
+    
+    <p class="report-text">
+      A eficiência do sistema Smart Trap (94,7%) demonstra a viabilidade do monitoramento automatizado 
+      como ferramenta complementar às atividades tradicionais de vigilância entomológica.
+    </p>
+  </div>
+
+  <div class="report-section">
+    <h2>Conclusões e Recomendações</h2>
+    <h3>Conclusões</h3>
+    <p class="report-text">
+      1. Há evidências de aumento na densidade vetorial de espécies de importância médica na área estudada.<br>
+      2. O sistema Smart Trap mostrou-se eficaz na detecção precoce de alterações na dinâmica populacional.<br>
+      3. A Zona Norte requer intervenções imediatas de controle vetorial.
+    </p>
+    
+    <h3>Recomendações</h3>
+    <p class="report-text">
+      1. Intensificar as ações de controle na Zona Norte, com foco em <em>Lutzomyia longipalpis</em>.<br>
+      2. Manter o monitoramento contínuo e expandir a rede de armadilhas em áreas periféricas.<br>
+      3. Realizar atividade de educação em saúde nas comunidades com maior risco.
+    </p>
+  </div>
+
+  <div class="report-footer">
+    <p>© 2024 Smart Trap - Sistema Inteligente de Vigilância de Vetores</p>
+    <p>Este é um documento técnico-científico gerado automaticamente. Para dúvidas, contate: lab.entomologia@smarttrap.br</p>
+    
+    <div class="signature-area">
+      <div class="signature-line">
+        ________________________________<br>
+        <strong>Dr. Ana Silva</strong><br>
+        Coordenadora de Entomologia
+      </div>
+      <div class="signature-line">
+        ________________________________<br>
+        <strong>Prof. Carlos Mendes</strong><br>
+        Consultor Epidemiológico
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Dados simulados para os gráficos
+const trendData = {
+  labels: ['01/10', '05/10', '10/10', '15/10', '20/10', '25/10', '30/10'],
+  datasets: [{
+    label: 'Capturas Diárias',
+    data: [85, 92, 78, 120, 142, 130, 118],
+    borderColor: '#0B5345',
+    backgroundColor: 'rgba(11, 83, 69, 0.1)',
+    borderWidth: 3,
+    tension: 0.4,
+    fill: true
+  }]
+};
+
+const speciesData = {
+  labels: ['L. longipalpis', 'A. aegypti', 'C. quinquefasciatus', 'A. albopictus', 'Outros'],
+  datasets: [{
+    data: [38, 28, 18, 12, 4],
+    backgroundColor: [
+      '#0B5345',
+      '#2E86C1',
+      '#F39C12',
+      '#27AE60',
+      '#5D6D7E'
+    ],
+    borderWidth: 2,
+    borderColor: '#FFFFFF'
+  }]
+};
+
+// Inicialização do dashboard
+function initDashboard() {
+  // Gráfico de tendência
+  const trendCtx = document.getElementById('trendChart').getContext('2d');
+  new Chart(trendCtx, {
+    type: 'line',
+    data: trendData,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          mode: 'index',
+          intersect: false
+        }
       },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: false }
+      scales: {
+        y: {
+          beginAtZero: true,
+          grid: { color: 'rgba(0,0,0,0.05)' },
+          title: {
+            display: true,
+            text: 'Número de Capturas'
+          }
         },
-        scales: {
-          y: {
-            beginAtZero: true
+        x: {
+          grid: { color: 'rgba(0,0,0,0.05)' }
+        }
+      }
+    }
+  });
+
+  // Gráfico de espécies
+  const speciesCtx = document.getElementById('speciesChart').getContext('2d');
+  new Chart(speciesCtx, {
+    type: 'doughnut',
+    data: speciesData,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '65%',
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            padding: 20,
+            usePointStyle: true
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              return `${context.label}: ${context.raw}%`;
+            }
           }
         }
       }
-    });
-  </script>
+    }
+  });
+
+  // Gráficos para o PDF
+  const pdfTrendCtx = document.getElementById('pdfTrendChart').getContext('2d');
+  new Chart(pdfTrendCtx, {
+    type: 'line',
+    data: trendData,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false }
+      },
+      scales: {
+        y: { beginAtZero: true }
+      }
+    }
+  });
+
+  const pdfSpeciesCtx = document.getElementById('pdfSpeciesChart').getContext('2d');
+  new Chart(pdfSpeciesCtx, {
+    type: 'pie',
+    data: speciesData,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'right'
+        }
+      }
+    }
+  });
+}
+
+// Sistema de login
+function fazerLogin() {
+  const codigo = document.getElementById('codigo').value;
+  const senha = document.getElementById('senha').value;
+  
+  if (codigo === 'admin' && senha === '1234') {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    
+    // Atualizar data no relatório
+    const now = new Date();
+    const options = { 
+      weekday: 'long', 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    };
+    document.getElementById('reportDate').textContent = now.toLocaleDateString('pt-BR', options);
+    
+    // Inicializar dashboard
+    initDashboard();
+    
+    // Efeito visual
+    document.querySelector('.dashboard').style.opacity = '0';
+    document.querySelector('.dashboard').style.transition = 'opacity 0.5s ease';
+    setTimeout(() => {
+      document.querySelector('.dashboard').style.opacity = '1';
+    }, 100);
+  } else {
+    alert('Credenciais inválidas. Use admin / 1234 para acesso de demonstração.');
+  }
+}
+
+// Exportar PDF
+function exportPDF() {
+  // Mostrar relatório
+  document.getElementById('pdfReport').style.display = 'block';
+  
+  // Configurar PDF
+  const element = document.getElementById('pdfReport');
+  const opt = {
+    margin: [15, 15, 15, 15],
+    filename: `relatorio_cientifico_smarttrap_${new Date().toISOString().slice(0,10)}.pdf`,
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { 
+      scale: 2,
+      useCORS: true,
+      logging: false,
+      backgroundColor: '#FFFFFF'
+    },
+    jsPDF: { 
+      unit: 'mm', 
+      format: 'a4', 
+      orientation: 'portrait',
+      compress: true
+    },
+    pagebreak: { mode: ['css', 'legacy'] }
+  };
+  
+  // Gerar PDF
+  html2pdf().set(opt).from(element).save().then(() => {
+    // Esconder relatório novamente
+    document.getElementById('pdfReport').style.display = 'none';
+  });
+}
+
+// Permitir login com Enter
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('senha').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      fazerLogin();
+    }
+  });
+});
+</script>
 
 </body>
 </html>
