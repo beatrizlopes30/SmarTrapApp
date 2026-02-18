@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="Smart Trap - Sistema inteligente de monitoramento de vetores para combate às Doenças Tropicais Negligenciadas">
+    <title>Smart Trap – Vigilância Inteligente de Vetores</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="container header-container">
+            <a href="#hero" class="logo">
+                <div class="logo-icon">ST</div>
+                <div class="logo-text">Smart<span>Trap</span></div>
+            </a>
+            
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav class="nav-links" id="navLinks">
+                <a href="#problem" class="nav-link">O Problema</a>
+                <a href="#solution" class="nav-link">Solução</a>
+                <a href="#how" class="nav-link">Como Funciona</a>
+                <a href="#differentials" class="nav-link">Diferenciais</a>
+                <a href="#team" class="nav-link">Equipe</a>
+                <a href="#plans" class="nav-link">Planos</a>
+                <a href="../plataform/index.html" class="btn btn-primary">Login</a>
+                <a href="#contact" class="btn btn-secondary">Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <h1>Vigilância Inteligente de Vetores</h1>
+                <p>Modernize o monitoramento de flebotomíneos e triatomíneos com tecnologia IoT, sensores e processamento embarcado para combater as Doenças Tropicais Negligenciadas.</p>
+                <div class="hero-buttons">
+                    <a href="#plans" class="btn btn-primary">Começar Agora</a>
+                    <a href="#solution" class="btn btn-secondary">Saiba Mais</a>
+                </div>
+            </div>
+            <div class="hero-image fade-in delay-1">
+                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="50" y="50" width="300" height="200" rx="20" fill="#2DBE9F" opacity="0.8"/>
+                    <circle cx="200" cy="150" r="60" fill="#0A352F"/>
+                    <rect x="140" y="140" width="120" height="20" rx="10" fill="#2DBE9F"/>
+                    <rect x="160" y="100" width="80" height="10" rx="5" fill="#2DBE9F"/>
+                    <rect x="160" y="190" width="80" height="10" rx="5" fill="#2DBE9F"/>
+                    <circle cx="120" cy="150" r="15" fill="#FF7A45"/>
+                    <circle cx="280" cy="150" r="15" fill="#FF7A45"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROBLEM SECTION -->
+    <section class="section section-light" id="problem">
+        <div class="container">
+            <div class="problem-container">
+                <div class="problem-content fade-in">
+                    <h2>O Desafio das DTNs</h2>
+                    <p>As Doenças Tropicais Negligenciadas (DTNs) afetam mais de 1 bilhão de pessoas em todo o mundo, especialmente populações vulneráveis. No Brasil, doenças como leishmaniose, dengue, malária e doença de Chagas representam um grande desafio sanitário.</p>
+                    <p>O monitoramento atual de vetores é manual, lento e oneroso, dependendo de coleta física de armadilhas e análise laboratorial, resultando em atrasos críticos na tomada de decisões de saúde pública.</p>
+                    
+                    <div class="problem-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">1B+</div>
+                            <p>Pessoas afetadas por DTNs</p>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">60%</div>
+                            <p>População da América Latina em risco</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="problem-image fade-in delay-1">
+                    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="50" y="50" width="300" height="300" rx="20" fill="#FFE8DD"/>
+                        <path d="M100,150 Q150,100 200,150 T300,150" stroke="#FF7A45" stroke-width="4" fill="none"/>
+                        <circle cx="150" cy="200" r="30" fill="#0A352F" opacity="0.7"/>
+                        <circle cx="250" cy="200" r="30" fill="#0A352F" opacity="0.7"/>
+                        <rect x="120" y="250" width="160" height="40" rx="10" fill="#1A7D6B"/>
+                        <text x="200" y="275" text-anchor="middle" fill="white" font-family="Arial" font-size="16">Monitoramento Manual</text>
+                        <line x1="180" y1="150" x2="180" y2="250" stroke="#FF7A45" stroke-width="3" stroke-dasharray="5,5"/>
+                        <line x1="220" y1="150" x2="220" y2="250" stroke="#FF7A45" stroke-width="3" stroke-dasharray="5,5"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOLUTION SECTION -->
+    <section class="section" id="solution">
+        <div class="container">
+            <div class="solution-container">
+                <div class="solution-image fade-in">
+                    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="50" y="50" width="300" height="300" rx="20" fill="#E8F5F2"/>
+                        <circle cx="200" cy="200" r="100" fill="#1A7D6B" opacity="0.8"/>
+                        <circle cx="200" cy="200" r="70" fill="#2DBE9F"/>
+                        <path d="M130,200 A70,70 0 0,1 270,200" fill="#0A352F"/>
+                        <circle cx="170" cy="170" r="15" fill="#FF7A45"/>
+                        <circle cx="230" cy="170" r="15" fill="#FF7A45"/>
+                        <rect x="170" y="230" width="60" height="20" rx="10" fill="#2DBE9F"/>
+                        <path d="M200,120 L200,80" stroke="#2DBE9F" stroke-width="4" fill="none"/>
+                        <circle cx="200" cy="70" r="10" fill="#2DBE9F"/>
+                        <path d="M120,200 L80,200" stroke="#2DBE9F" stroke-width="4" fill="none"/>
+                        <circle cx="70" cy="200" r="10" fill="#2DBE9F"/>
+                        <path d="M280,200 L320,200" stroke="#2DBE9F" stroke-width="4" fill="none"/>
+                        <circle cx="330" cy="200" r="10" fill="#2DBE9F"/>
+                        <path d="M200,280 L200,320" stroke="#2DBE9F" stroke-width="4" fill="none"/>
+                        <circle cx="200" cy="330" r="10" fill="#2DBE9F"/>
+                    </svg>
+                </div>
+                
+                <div class="solution-content fade-in delay-1">
+                    <h2>Solução Inovadora</h2>
+                    <p>A <strong>Smart Trap</strong> é uma armadilha inteligente desenvolvida para modernizar o monitoramento de vetores epidemiológicos, focando em flebotomíneos (leishmaniose) e triatomíneos (doença de Chagas).</p>
+                    <p>Dispositivo autônomo equipado com sensores ópticos, câmera de alta precisão e módulo de processamento embarcado que identifica automaticamente os insetos por algoritmos de classificação.</p>
+                    
+                    <div class="solution-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-solar-panel"></i>
+                            </div>
+                            <h4>Energia Solar</h4>
+                            <p>Baterias recarregáveis com painéis solares para operação contínua.</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h4>IA Integrada</h4>
+                            <p>Algoritmos de classificação automática de vetores em tempo real.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section section-dark" id="how">
+        <div class="container">
+            <div class="section-title-center">
+                <h2>Como Funciona</h2>
+                <p>O sistema Smart Trap transforma o monitoramento de vetores em um processo automatizado e eficiente.</p>
+            </div>
+            
+            <div class="how-steps">
+                <div class="step fade-in">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Captura Automática</h3>
+                        <p>O dispositivo atrai e captura os insetos vetores de forma automática, sem necessidade de intervenção humana.</p>
+                    </div>
+                </div>
+                
+                <div class="step fade-in delay-1">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Identificação em Tempo Real</h3>
+                        <p>Sensores ópticos e câmera de alta precisão capturam imagens que são processadas por algoritmos de IA para identificar a espécie.</p>
+                    </div>
+                </div>
+                
+                <div class="step fade-in delay-2">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Transmissão de Dados</h3>
+                        <p>Os dados georreferenciados são transmitidos via rede celular ou satélite para a plataforma web em tempo real.</p>
+                    </div>
+                </div>
+                
+                <div class="step fade-in delay-3">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Análise e Alertas</h3>
+                        <p>A plataforma gera mapas, gráficos e alertas automáticos para tomada de decisão rápida pelas autoridades de saúde.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DIFFERENTIALS -->
+    <section class="section section-light" id="differentials">
+        <div class="container">
+            <div class="section-title-center">
+                <h2>Diferenciais Inovativos</h2>
+                <p>A Smart Trap representa um novo padrão na vigilância de vetores, oferecendo soluções estratégicas de difícil replicação.</p>
+            </div>
+            
+            <div class="differentials-grid">
+                <div class="differential-card fade-in">
+                    <div class="differential-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Tempo Real</h3>
+                    <p>Monitoramento contínuo com transmissão imediata de dados, eliminando atrasos da coleta manual.</p>
+                </div>
+                
+                <div class="differential-card fade-in delay-1">
+                    <div class="differential-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Automação Completa</h3>
+                    <p>Identificação automática de espécies por algoritmos de IA, reduzindo erros humanos e custos laboratoriais.</p>
+                </div>
+                
+                <div class="differential-card fade-in delay-2">
+                    <div class="differential-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>Georreferenciamento</h3>
+                    <p>Dados precisos com localização GPS para mapeamento de focos e tomada de decisão estratégica.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEAM -->
+    <section class="section" id="team">
+        <div class="container">
+            <div class="section-title-center">
+                <h2>Nossa Equipe</h2>
+                <p>Conheça o time multidisciplinar por trás da Smart Trap, reunindo competências essenciais para o sucesso do projeto.</p>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-member fade-in">
+                    <div class="member-image">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <div class="member-info">
+                        <h3>Bárbara Camila Carmo de Jesus</h3>
+                        <div class="member-role">CEO da Empresa</div>
+                        <p>Graduanda em Medicina Veterinária com experiência em parasitologia veterinária, biotecnologia e inovação tecnológica.</p>
+                    </div>
+                </div>
+                
+                <div class="team-member fade-in delay-1">
+                    <div class="member-image">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="member-info">
+                        <h3>Sandra Borges da Silva</h3>
+                        <div class="member-role">Orientadora / Pesquisadora</div>
+                        <p>Doutora em Parasitologia Veterinária com ampla experiência em epidemiologia parasitária e controle de doenças.</p>
+                    </div>
+                </div>
+                
+                <div class="team-member fade-in delay-2">
+                    <div class="member-image">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="member-info">
+                        <h3>Ana Beatriz Silva Lopes</h3>
+                        <div class="member-role">CTO da empresa</div>
+                        <p>Especialista em desenvolvimento de sistemas e soluções tecnológicas inovadoras, com múltiplas premiações em competições de tecnologia.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-member fade-in delay-1">
+                    <div class="member-image">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="member-info">
+                        <h3>Bruce Lopes Cavalcante</h3>
+                        <div class="member-role">Especialista em IA</div>
+                        <p>Focado em desenvolvimento e aplicação de modelos de Inteligência Artificial para classificação e reconhecimento de padrões.</p>
+                    </div>
+                </div>
+                
+                <div class="team-member fade-in delay-2">
+                    <div class="member-image">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <div class="member-info">
+                        <h3>Luiz Gabriel dos Santos e Silva</h3>
+                        <div class="member-role">Engenheiro IoT</div>
+                        <p>Responsável pelo desenvolvimento e integração dos sistemas embarcados, sensores inteligentes e comunicação IoT.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PLANS -->
+    <section class="section section-light" id="plans">
+        <div class="container">
+            <div class="section-title-center">
+                <h2>Planos e Preços</h2>
+                <p>Escolha o plano ideal para sua instituição e comece a modernizar o monitoramento de vetores hoje mesmo.</p>
+            </div>
+            
+            <div class="plans-grid">
+                <div class="plan-card fade-in">
+                    <h3>Grátis</h3>
+                    <p>Para teste e avaliação da tecnologia</p>
+                    <div class="plan-price">10 dias</div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> 1 ponto de monitoramento</li>
+                        <li><i class="fas fa-check"></i> Estação meteorológica integrada</li>
+                        <li><i class="fas fa-check"></i> Acesso à plataforma web</li>
+                        <li><i class="fas fa-check"></i> Suporte por email</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary">Testar Grátis</a>
+                </div>
+                
+                <div class="plan-card popular fade-in delay-1">
+                    <div class="plan-badge">Mais Popular</div>
+                    <h3>Básico</h3>
+                    <p>Para secretarias de saúde e pequenos projetos</p>
+                    <div class="plan-price">R$ 1000 <span>/ ano por dispositivo</span></div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> Até 5 pontos de monitoramento</li>
+                        <li><i class="fas fa-check"></i> Upload automático de imagens</li>
+                        <li><i class="fas fa-check"></i> Relatórios mensais</li>
+                        <li><i class="fas fa-check"></i> Suporte técnico prioritário</li>
+                        <li><i class="fas fa-check"></i> Integração com sistemas de vigilância</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-white">Assinar Agora</a>
+                </div>
+                
+                <div class="plan-card fade-in delay-2">
+                    <h3>Premium</h3>
+                    <p>Para institutos de pesquisa e grandes projetos</p>
+                    <div class="plan-price">R$ 2500 <span>/ ano por dispositivo</span></div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> Pontos de monitoramento ilimitados</li>
+                        <li><i class="fas fa-check"></i> Reconhecimento avançado de pragas</li>
+                        <li><i class="fas fa-check"></i> Alertas automáticos por região</li>
+                        <li><i class="fas fa-check"></i> API para integração completa</li>
+                        <li><i class="fas fa-check"></i> Suporte 24/7 com especialista</li>
+                        <li><i class="fas fa-check"></i> Treinamento da equipe</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary">Assinar Agora</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta-section" id="contact">
+        <div class="container">
+            <h2>Pronto para Modernizar o Monitoramento de Vetores?</h2>
+            <p>Junte-se a secretarias de saúde, agentes de endemias, centros de vigilância, institutos de pesquisa, universidades e ONGs que já estão transformando o combate às DTNs com tecnologia inteligente.</p>
+            <a href="#contact" class="btn btn-primary">Solicitar Demonstração</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <div class="logo-icon">ST</div>
+                        <div class="logo-text">Smart<span>Trap</span></div>
+                    </div>
+                    <p>Modernizando o monitoramento de vetores com tecnologia IoT, sensores e processamento embarcado para combater as Doenças Tropicais Negligenciadas.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Links Rápidos</h4>
+                    <ul class="footer-links">
+                        <li><a href="#problem">O Problema</a></li>
+                        <li><a href="#solution">Solução</a></li>
+                        <li><a href="#how">Como Funciona</a></li>
+                        <li><a href="#differentials">Diferenciais</a></li>
+                        <li><a href="#team">Equipe</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Planos</h4>
+                    <ul class="footer-links">
+                        <li><a href="#plans">Grátis</a></li>
+                        <li><a href="#plans">Básico</a></li>
+                        <li><a href="#plans">Premium</a></li>
+                        <li><a href="#plans">Personalizado</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Contato</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> contato@smarttrap.com.br</li>
+                        <li><i class="fas fa-phone"></i> +55 (99) 99145-9548</li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2026 Smart Trap – Vigilância Inteligente de Vetores. Todos os direitos reservados.</p>
+                <p>Projeto desenvolvido com apoio do Programa Centelha - MA.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="index.js"></script>
+</body>
+</html>
