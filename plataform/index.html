@@ -22,7 +22,6 @@
 <div class="login-screen" id="loginScreen">
   <div class="login-card">
     <div class="logo-container">
-      <div class="logo-scientific"></div>
       <h1>Smart Trap</h1>
       <p class="login-subtitle">Sistema Inteligente de Vigilância Entomológica</p>
     </div>
@@ -41,9 +40,6 @@
       <i class="fas fa-sign-in-alt"></i> Acessar Sistema
     </button>
     
-    <p style="margin-top: 20px; font-size: 14px; color: var(--gray-600);">
-      <i class="fas fa-info-circle"></i> Use <strong>admin</strong> / <strong>1234</strong> para teste
-    </p>
   </div>
 </div>
 
@@ -82,7 +78,7 @@
       </div>
       <div class="kpi-content">
         <h3>Capturas Totais (24h)</h3>
-        <div class="kpi-value">142</div>
+        <div class="kpi-value">32</div>
         <div class="kpi-trend trend-up">
           <i class="fas fa-arrow-up"></i> 12% vs. período anterior
         </div>
@@ -95,7 +91,7 @@
       </div>
       <div class="kpi-content">
         <h3>Armadilhas Ativas</h3>
-        <div class="kpi-value">18</div>
+        <div class="kpi-value">5</div>
         <div class="kpi-trend trend-up">
           <i class="fas fa-check-circle"></i> 100% operacionais
         </div>
@@ -150,7 +146,7 @@
   <div class="alerts-card">
     <div class="alerts-header">
       <h2><i class="fas fa-exclamation-circle"></i> Alertas Epidemiológicos</h2>
-      <div class="alert-badge">5 Alertas Ativos</div>
+      <div class="alert-badge">3 Alertas Ativos</div>
     </div>
     
     <div class="alert-item alert-critical">
@@ -158,8 +154,9 @@
         <i class="fas fa-skull-crossbones"></i>
       </div>
       <div class="alert-content">
-        <h4>ALERTA: Aumento de Flebotomíneos - Zona Norte</h4>
-        <p>Incremento de 240% na captura de Lutzomyia longipalpis. Risco elevado para transmissão de Leishmaniose Visceral.</p>
+        <h4> Alerta de aumento de lutzomya longipalpis - Ribeirãozinho </h4>
+        <p>Registro de 12 exemplares de lutzomya longipalpis capturados na localidade de ribeirãozinho, indicando potencial risco para transmissão de leishmaniose visceral. </p>
+        <p>Recomendação: monitoramento contínuo e intensificação das ações de vigilância entomológica na área. </p>
         <div class="alert-meta">
           <span><i class="far fa-clock"></i> Detectado hoje às 08:42</span>
           <span><i class="fas fa-map-pin"></i> Coordenadas: -23.5505, -46.6333</span>
@@ -172,11 +169,11 @@
         <i class="fas fa-exclamation-triangle"></i>
       </div>
       <div class="alert-content">
-        <h4>Aedes aegypti acima do limite de segurança</h4>
-        <p>Densidade de 4.2 mosquitos/armadilha. Limiar de segurança: 2.0. Recomenda-se intensificação de controle.</p>
+        <h4>Registro de 6 exemplares de Lutzomyia longipalpis</h4>
+        <p>Capturados na região central de Imperatriz, indicando risco moderado para transmissão de Leishmaniose visceral.</p>
         <div class="alert-meta">
           <span><i class="far fa-clock"></i> Há 2 dias</span>
-          <span><i class="fas fa-map-pin"></i> Setor Leste</span>
+          <span><i class="fas fa-map-pin"></i> Vila Redenção - Imperatriz</span>
         </div>
       </div>
     </div>
@@ -186,11 +183,11 @@
         <i class="fas fa-info-circle"></i>
       </div>
       <div class="alert-content">
-        <h4>Baixa eficiência em armadilha #12</h4>
+        <h4>Baixa eficiência em armadilha #3</h4>
         <p>Capturas 65% abaixo da média do setor. Verificar localização e atrativos.</p>
         <div class="alert-meta">
           <span><i class="far fa-clock"></i> Há 3 dias</span>
-          <span><i class="fas fa-map-pin"></i> Armadilha #12</span>
+          <span><i class="fas fa-map-pin"></i> Armadilha #3</span>
         </div>
       </div>
     </div>
@@ -216,22 +213,54 @@
         <tbody>
           <tr>
             <td><strong>ST-001</strong></td>
-            <td>Zona Norte - Parque</td>
+            <td>Vila Vitória - Imperatriz - MA</td>
             <td><span class="species-tag">Lutzomyia longipalpis</span></td>
-            <td>42</td>
-            <td>26.4°C</td>
-            <td>78%</td>
-            <td class="risk-high">Alto</td>
+            <td>8</td>
+            <td>36.4°C</td>
+            <td>48%</td>
+            <td class="risk-high">Médio</td>
             <td><span style="color: var(--success);"><i class="fas fa-circle"></i> Ativa</span></td>
           </tr>
           <tr>
             <td><strong>ST-002</strong></td>
-            <td>Centro - Praça</td>
+            <td>Centro - Imperatriz - MA</td>
+            <td><span class="species-tag">Culex quinquefasciatus</span></td>
+            <td>5</td>
+            <td>32°C</td>
+            <td>52%</td>
+            <td class="risk-medium">Alto</td>
+            <td><span style="color: var(--success);"><i class="fas fa-circle"></i> Ativa</span></td>
+          </tr>
+          <tr>
+            <td><strong>ST-003</strong></td>
+            <td>Cidade Nova - João Lisboa - MA</td>
+            <td><span class="species-tag">Lutzomyia longipalpis</span></td>
+            <td>5</td>
+            <td>34.7°C</td>
+            <td>32%</td>
+            <td class="risk-medium">Baixo</td>
+            <td><span style="color: var(--success);"><i class="fas fa-circle"></i> Ativa</span></td>
+          </tr>
+
+          <tr>
+            <td><strong>ST-002</strong></td>
+            <td>Centro - Ribeiraozinho - MA</td>
             <td><span class="species-tag">Aedes aegypti</span></td>
-            <td>28</td>
-            <td>25.8°C</td>
-            <td>72%</td>
-            <td class="risk-medium">Médio</td>
+            <td>11</td>
+            <td>37.1°C</td>
+            <td>51%</td>
+            <td class="risk-medium">Alto</td>
+            <td><span style="color: var(--success);"><i class="fas fa-circle"></i> Ativa</span></td>
+          </tr>
+
+          <tr>
+            <td><strong>ST-002</strong></td>
+            <td>Vila Redenção - Imperatriz - MA</td>
+            <td><span class="species-tag">Lutzomyia longipalpis</span></td>
+            <td>4</td>
+            <td>35.6°C</td>
+            <td>29%</td>
+            <td class="risk-medium">Baixo</td>
             <td><span style="color: var(--success);"><i class="fas fa-circle"></i> Ativa</span></td>
           </tr>
           <!-- Mais linhas... -->

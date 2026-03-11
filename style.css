@@ -685,6 +685,15 @@ footer {
     font-size: 0.9rem;
 }
 
+.image-problem{
+    display: flex;
+  align-items: center; /* alinha verticalmente */
+  justify-content: space-between;
+   width: 200px; /* ajuste como quiser */
+   height: auto;
+  margin-left: 20px;
+}
+
 /* ANIMATIONS */
 @keyframes fadeInUp {
     from {
@@ -711,6 +720,17 @@ footer {
 
 .delay-3 {
     animation-delay: 0.6s;
+}
+
+/* ===== NOVAS REGRAS PARA AS IMAGENS SUBSTITUÍDAS ===== */
+.problem-image img,
+.solution-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;          /* mesmo arredondamento dos SVGs anteriores */
+    box-shadow: var(--shadow);     /* suave sombra para destacar */
+    object-fit: cover;             /* garante que a imagem cubra o espaço sem distorcer */
+    display: block;                /* remove espaços extras abaixo da imagem */
 }
 
 /* RESPONSIVE */
