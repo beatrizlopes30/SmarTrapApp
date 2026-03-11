@@ -185,6 +185,13 @@ header {
     gap: 12px;
 }
 
+.logo-img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    
+}
+
 .logo-icon {
     width: 40px;
     height: 40px;
@@ -210,7 +217,7 @@ header {
 
 .nav-links {
     display: flex;
-    gap: 40px;
+    gap: 35px;
     align-items: center;
 }
 
@@ -255,7 +262,7 @@ header {
 .hero {
     padding: 180px 0 120px;
     background: linear-gradient(135deg, rgba(10, 53, 47, 0.9) 0%, rgba(26, 125, 107, 0.8) 100%), 
-                url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+                url('https://jornal.usp.br/wp-content/uploads/2023/05/20230522_Aedes_aegypti.jpg');
     background-size: cover;
     background-position: center;
     color: var(--white);
